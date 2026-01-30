@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register | Notes Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        /* Page Background */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #4e73df, #1cc88a);
+        }
+
+        /* Card */
+        .card {
+            width: 350px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Heading */
+        h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Form spacing */
+        .mb-3 {
+            margin-bottom: 15px;
+        }
+
+        /* Labels */
+        label {
+            font-weight: bold;
+        }
+
+        /* Inputs */
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Button */
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #1cc88a;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #17a673;
+        }
+
+        /* Footer text */
+        p {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* Links */
+        a {
+            text-decoration: none;
+            color: #4e73df;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Flash messages */
+        .flash {
+            text-align: center;
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <h3>Create Account</h3>
+
+    <form method="POST">
+        <div class="mb-3">
+            <label>Name</label>
+            <input type="text" name="uname" placeholder="Enter name" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="uemail" placeholder="Enter email" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password" required minlength="6">
+        </div>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p>
+        Already have an account?
+        <a href="/login">Login</a>
+    </p>
+</div>
+
+</body>
+</html>

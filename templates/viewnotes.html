@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Note</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>View Note</h1>
+
+     <!-- Flash messages -->
+        {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+      <center>{{ message }} </center>
+    {% endfor %}
+   
+    {% endif %}
+    {% endwith %}
+        {{notesdata[4]}}
+    <label>Title:</label>
+    <input type="text" value="{{ notesdata[1] }}" readonly>
+
+    <label>Content:</label>
+    <textarea rows="6" readonly>{{ notesdata[2] }}</textarea>
+
+    
+
+    <div class="link">
+        <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+    </div>
+</div>
+
+</body>
+</html>

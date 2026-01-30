@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Notes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+         <!-- Flash messages -->
+        {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+      <center>{{ message }} </center>
+    {% endfor %}
+   
+    {% endif %}
+    {% endwith %}
+        <h1>Add Note</h1>
+        <p>Write your note below</p>
+
+       
+
+        <!-- Add Note Form -->
+        <form method="post" action="{{ url_for('addnotes') }}">
+            <input type="text" name="title" placeholder="Note Title" required>
+
+            <textarea name="content" placeholder="Write your note here..." rows="6" required></textarea>
+
+            <input type="submit" value="Save Note" class="btn">
+        </form>
+
+        <div class="link">
+            <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Note</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>View Note</h1>
+ <!-- Flash messages -->
+        {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+      <center>{{ message }} </center>
+    {% endfor %}
+   
+    {% endif %}
+    {% endwith %}
+        {{notesdata[4]}}
+       
+    <label>Title:</label>
+  <table>
+    <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Created time</th>
+            <th>Links</th>
+        
+    </tr>
+    {% for i in notesdata %}
+    <tr>
+        <td>{{i[0]}}</td>
+        <td>{{i[1]}}</td>
+        <td>{{i[4]}}</td>
+        <td><a href="{{url_for('viewnotes',nid=i[0])}}">View</a></td>
+        <td><a href="{{url_for('updatenotes',nid=i[0])}}">Update</a></td>
+        <td><a href="{{url_for('deletenotes',nid=i[0])}}">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+   
+    
+
+    <div class="link">
+        <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #9fb3c7;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Buttons */
+        nav button {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 7px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        nav button:hover {
+            background-color: #0b5ed7;
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+        }
+
+        .logout-btn:hover {
+            background-color: #bb2d3b;
+        }
+
+        /* Dropdown */
+        .dropdown-box {
+            background-color: white;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            display: block;
+            text-decoration: none;
+            color: #212529;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Right section */
+        .right-section {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-email {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Search */
+        .search-box {
+            padding: 6px 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 200px;
+        }
+
+        /* Flash message */
+        .flash {
+            text-align: center;
+            color: green;
+            padding: 8px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Flash messages -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<nav>
+    <div>
+        <button>Notes</button>
+        <div class="dropdown-box">
+            <a href="{{ url_for('addnotes') }}">Add Notes</a>
+            <a href="{{ url_for('viewallnotes') }}">View All Notes</a>
+            <a href="{{ url_for('getexceldata') }}">Get Excel</a>
+        </div>
+    </div>
+
+    <div>
+        <button>Files</button>
+        <div class="dropdown-box">
+            <a href="{{ url_for('uploadfile') }}">Upload Files</a>
+            <a href="{{ url_for('viewallfiles') }}">View All Files</a>
+        </div>
+    </div>
+
+   
+    <div class="right-section">
+        <span class="user-email">{{ session.get('user') }}</span>
+
+        <form method="POST" action="{{ url_for('search') }}">
+            <input type="text" name="search_value" class="search-box" placeholder="Search">
+        </form>
+
+        <a href="{{ url_for('logout') }}">
+            <button class="logout-btn">Logout</button>
+        </a>
+    </div>
+</nav>
+
+</body>
+</html>
